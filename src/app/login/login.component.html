@@ -1,0 +1,22 @@
+<link rel="stylesheet" href="../assets/css/materialize.min.css">
+<link rel="stylesheet" href="../assets/css/style.css">
+<script src="../assets/js/materialize.min.js"></script>
+
+<div *ngIf="!logged">
+  <form #formUser="ngForm" (ngSubmit)="onSubmit(); formUser.reset();">
+      <label>Correo: </label>
+      <input type="text" name="mail" #mail="ngModel" [(ngModel)]="email"
+             required pattern="^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$">
+      <br />
+      <label>Password: </label>
+      <input type="password" name="pass1" #pass1="ngModel" [(ngModel)]="password"
+             required pattern="^(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])(?=.*[a-z]).{8,}$">
+      <span *ngIf="pass1.touched && !pass1.valid">
+        La contraseña debe tener 8 caracteres mínimo, 1 mayúscula, 1 caracter especial (!@#$&*), 1 número y 1 minúscula.
+      </span>
+      <input class="btn-small waves-effect waves-light red" 
+             type="submit" value="Login" [disabled]="!formUser.form.valid" />
+      <br />
+    </form>
+</div>
+  

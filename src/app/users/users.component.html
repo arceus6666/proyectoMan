@@ -1,0 +1,13 @@
+<ul *ngIf="users">
+    <li *ngFor="let user of users">
+      Título: {{user.name}}
+      <br/>
+      ID: {{user._id}}
+      <br/>
+      Habilitado: {{user.able? 'Si':'No'}}a}}
+      <br/>
+      <button *ngIf="user.able" id="deshabilitar" (click)="disable(user)" >Deshabilitar</button>
+      <br/>
+    </li>
+  </ul>
+  <span *ngIf="!users">Cargando...</span>

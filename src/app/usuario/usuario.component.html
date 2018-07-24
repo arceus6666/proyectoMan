@@ -1,0 +1,68 @@
+<link rel="stylesheet" href="../assets/css/materialize.min.css">
+<link rel="stylesheet" href="../assets/css/style.css">
+<script src="../assets/js/materialize.min.js"></script>
+
+<div >
+  <label>Password: </label>
+  <input type="password" name="pass1" #pass1="ngModel" [(ngModel)]="password"
+         required pattern="^(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])(?=.*[a-z]).{8,}$">
+  <span *ngIf="pass1.touched && !pass1.valid">
+    La contraseña debe tener 8 caracteres mínimo, 1 mayúscula, 1 caracter especial (!@#$&*), 1 número y 1 minúscula.
+  </span>
+  <br />
+  <div *ngIf="user">
+    <b>{{user.name}} {{user.lastName}}</b>
+    <br />
+    {{user.age}}
+    <br />
+  </div>
+  <span *ngIf="!user">Cargando perfil...</span>
+  <button class="btn-small waves-effect waves-light red" value="login" (click)="setModify()" [disabled]="!pass1.valid" >Login</button>
+</div>
+<div *ngIf="pass1.valid">
+  <button class="btn-small waves-effect waves-light red" value="Editar" (click)="setModify()" [disabled]="!pass1.valid" >Editar</button>
+</div>
+
+<div *ngIf="modify && pass1.valid">
+  <form #formUser="ngForm" (ngSubmit)="onSubmit(); formUser.reset();">
+      <label>Nombre: </label>
+      <input type="text" name="name" #name="ngModel" [(ngModel)]="user.name"
+             required pattern="[a-zA-Z0-9]+">
+      <span *ngIf="name.touched && !name.valid">
+        El nombre es invalido.
+      </span>
+      <br />
+      <label>Apellido: </label>
+      <input type="text" name="ln" #ln="ngModel" [(ngModel)]="user.lastName"
+             required pattern="[a-zA-Z]+">
+      <span *ngIf="ln.touched && !ln.valid">
+        El apellido es invalido.
+      </span>
+      <br />
+      <label>Correo: </label>
+      <input type="text" name="mail" #mail="ngModel" [(ngModel)]="user.email"
+             required pattern="[a-zA-Z]+">
+      <span *ngIf="mail.touched && !mail.valid">
+        El apellido es invalido.
+      </span>
+      <br />
+      <label>Edad: </label>
+      <input type="number" name="age" #age="ngModel" [(ngModel)]="user.age"
+             required>
+      <span *ngIf="age.touched && !age.valid">
+        La edad es invalida.
+      </span>
+      <br />
+      <label>Password: </label>
+      <input type="password" name="pass" #pass="ngModel" [(ngModel)]="user.password"
+             required pattern="^(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])(?=.*[a-z]).{8}$">
+      <span *ngIf="pass.touched && !pass.valid">
+        La contraseña debe tener 8 caracteres mínimo, 1 mayúscula, 1 caracter especial (!@#$&*), 1 número y 1 minúscula.
+      </span>
+      <br />
+      <input class="btn-small waves-effect waves-light green" 
+             type="submit" value="Guardar" [disabled]="!formUser.form.valid" />
+      <br />
+    </form>
+</div>
+  

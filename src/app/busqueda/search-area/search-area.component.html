@@ -1,0 +1,46 @@
+<link rel="stylesheet" href="../assets/css/materialize.min.css">
+<link rel="stylesheet" href="../assets/css/style.css">
+<script src="../assets/js/materialize.min.js"></script>
+<nav class="black lighten-1" role="navigation">
+  <div class="nav-wrapper container">
+    <ul class="right hide-on-med-and-down">
+      <li>
+        <a [routerLink]="['/search/author']" [routerLinkActive]="['red']">Autor</a>
+      </li>
+      <li>
+        <a [routerLink]="['/search/year']" [routerLinkActive]="['red']">Año</a>
+      </li>
+      <li>
+          <a [routerLink]="['/search/area']" [routerLinkActive]="['red']">Area</a>
+      </li>
+      <li>
+        <a [routerLink]="['/search/title']" [routerLinkActive]="['red']">Título</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+<div>
+  <div>
+    <input [(ngModel)]="arg">
+    <button name="click" (click)="getBooks()">Buscar</button>
+  </div>
+  <ul *ngIf="libros">
+    <li *ngFor="let libro of libros">
+      Título: {{libro.name}}
+      <br/>
+      Autor: {{libro.author.firstName}} {{libro.author.lastName}} <p *ngIf="libro.author.nickName" >({{libro.author.nickName}})</p>
+      <br/>
+      Edición: {{libro.edition}}
+      <br/>
+      Publicación: {{libro.publishing | date}}
+      <br/>
+      Area: {{libro.area}}
+      <div *ngIf="libro.editorial">Editorial: {{libro.editorial}}</div>
+      <div>Prestado: {{libro.borrowed ? 'Prestado' : 'Disponible'}}</div>
+      <button *ngIf="!_logger.getRole() && _logger.isLoged() && !libro.borrowed" id="prestamo" (click)="prestamo(libro)" >Prestamo</button>
+      <br/>
+    </li>
+  </ul>
+  <span *ngIf="!libros">Cargando...</span>
+</div>
+  

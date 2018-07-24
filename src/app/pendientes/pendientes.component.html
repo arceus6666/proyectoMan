@@ -1,0 +1,17 @@
+<div>
+  <ul *ngIf="libros">
+    <li *ngFor="let libro of libros">
+      Título: {{libro.name}}
+      <br/>
+      Autor: {{libro.author.firstName}} {{libro.author.lastName}} <p *ngIf="libro.author.nickName" >({{libro.author.nickName}})</p>
+      <br/>
+      Edición: {{libro.edition}}
+      <br/>
+      Solicitante: {{libro.borrowerID}}
+      <br/>
+      <button id="prestar" (click)="prestar(libro)" >Prestar</button>
+      <hr/>
+    </li>
+  </ul>
+  <span *ngIf="!libros">Cargando información...</span>
+</div>

@@ -1,0 +1,61 @@
+<link rel="stylesheet" href="../assets/css/materialize.min.css">
+<link rel="stylesheet" href="../assets/css/style.css">
+<script src="../assets/js/materialize.min.js"></script>
+<form #formLibro="ngForm" (ngSubmit)="onSubmit(); formLibro.reset();">
+  <label class="black-text mysize">Título: </label>
+  <input type="text" name="name" #name="ngModel" [(ngModel)]="libro.name"
+   required pattern="[a-zA-Z0-9]+">
+  <span *ngIf="name.touched && !name.valid">
+    El título del libro es invalido.
+  </span>
+  <br /><br />
+  <label class="black-text mysize">Autor: </label>
+  <div>
+    <label class="black-text">Nombre: </label>
+    <input type="text" name="fn" #fn="ngModel" [(ngModel)]="libro.author.firstName"
+           required pattern="[a-zA-Z]+">
+    <span *ngIf="fn.touched && !fn.valid">
+      El nombre del autor es invalido.
+    </span>
+    <br />
+    <label class="black-text">Apellido: </label>
+    <input type="text" name="ln" #ln="ngModel" [(ngModel)]="libro.author.lastName"
+           required pattern="[a-zA-Z]+">
+    <span *ngIf="ln.touched && !ln.valid">
+      El apellido del autor es invalido.
+    </span>
+    <br />
+    <label class="black-text">Apodo: </label>
+    <input type="text" name="nick" #nick="ngModel" [(ngModel)]="libro.author.nickName"
+           pattern="[a-zA-Z]+">
+    <span *ngIf="nick.touched && !nick.valid">
+      El apodo del autor es invalido.
+    </span>
+    <br />
+  </div>
+  <br />
+  <label class="black-text mysize">Edición: </label>
+  <input type="number" name="edition" #edition="ngModel" [(ngModel)]="libro.edition"
+         required>
+  <span *ngIf="edition.touched && !edition.valid">
+    La edición del libro es invalida.
+  </span>
+  <br />
+  <label class="black-text mysize">Publicación: </label>
+  <input type="date" name="publishing" #publishing="ngModel" [(ngModel)]="libro.publishing"
+         required>
+  <span *ngIf="publishing.touched && !publishing.valid">
+    La publicación del libro es invalida.
+  </span>
+  <br />
+  <label class="black-text mysize">Editorial: </label>
+  <input type="text" name="editorial" #editorial="ngModel" [(ngModel)]="libro.editorial"
+         pattern="[a-zA-Z0-9#]+">
+  <span *ngIf="editorial.touched && !editorial.valid">
+    La editorial del libro es invalida.
+  </span>
+  <br />
+  <input class="btn-large waves-effect waves-light orange" 
+  type="submit" value="Guardar" [disabled]="!formLibro.form.valid" />
+  <br />
+</form>
